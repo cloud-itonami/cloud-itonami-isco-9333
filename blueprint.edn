@@ -1,10 +1,1 @@
-{:itonami.blueprint/id "cloud-itonami-isco-9333"
- :itonami.blueprint/name "Independent Freight Handling Practice"
- :itonami.blueprint/isco-08 "9333"
- :itonami.blueprint/domain :logistics/freight-handling
- :itonami.blueprint/license "AGPL-3.0-or-later"
- :itonami.blueprint/social-impact [:local-jobs :supply-reliability :worker-safety]
- :itonami.blueprint/governor :freight-handling-governor
- :itonami.blueprint/robotics true
- :itonami.blueprint/required-technologies [:robotics :forms :telemetry :audit-ledger :bpmn]
- :itonami.blueprint/status :public-oss}
+[{:itonami.blueprint/social-impact [:local-jobs :supply-reliability :worker-safety], :itonami.blueprint/domain :logistics/freight-handling, :itonami.blueprint/required-technologies [:robotics :forms :telemetry :audit-ledger :bpmn], :itonami.blueprint/isco-08 "9333", :itonami.blueprint/name "Independent Freight Handling Practice", :itonami.blueprint/governor :freight-handling-governor, :itonami.blueprint/robotics true, :db/id -1, :itonami.blueprint/status :public-oss, :itonami.blueprint/id "cloud-itonami-isco-9333", :itonami.blueprint/license "AGPL-3.0-or-later"}]
