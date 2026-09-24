@@ -1,0 +1,35 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:physics` runs it.
+;;
+;; README "Robotics premise": a pallet-handling robot performs freight loading,
+;; unloading and weight-verification tasks (ISCO 9333). Its physical work:
+;; driving a loaded pallet across the dock leveller into the trailer, and
+;; carrying a stacked pallet across the warehouse, where the stack height
+;; decides whether an emergency stop tips it.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+;; Replacing an estimate with a sourced value is this bot's growth work.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isco-9333"
+ :cases
+ [{:id :pallet-over-dock-leveller
+   :kind :transport
+   :procedure "pallet robot drives a 1000 kg pallet 8 m from the dock over the dock leveller into the trailer; leveller grade varied with the trailer bed height"
+   :params {:mass-kg 400.0 :payload-kg 1000.0 :distance-m 8.0 :v-max-mps 1.0 :a-max-mps2 0.3
+            :brake-decel-mps2 0.8 :drive-force-n 1500.0 :crr 0.01
+            :cog-height-m 0.35 :support-half-length-m 0.40 :payload-cog-height-m 0.80
+            :max-time-s 600.0}
+   :sweep {:param :slope-deg :values [0.0 2.0 4.0 5.0 6.0 8.0]}
+   :quantity :cycle-time-s
+   :limit {:max 20.0 :basis "estimate: one dock crossing within the trailer-loading rate of about one pallet per minute"}
+   :boundary {:lo 0.0 :hi 12.0}}
+  {:id :stacked-pallet-e-stop
+   :kind :transport
+   :procedure "pallet robot carries an 800 kg stacked pallet 30 m across the warehouse and makes an emergency stop at 2 m/s2; stack centre-of-gravity height varied"
+   :params {:mass-kg 400.0 :payload-kg 800.0 :distance-m 30.0 :v-max-mps 1.5 :a-max-mps2 0.3
+            :brake-decel-mps2 2.0 :drive-force-n 1500.0 :crr 0.01
+            :cog-height-m 0.35 :support-half-length-m 0.35 :max-time-s 600.0}
+   :sweep {:param :payload-cog-height-m :values [0.6 1.0 1.4 1.8 2.2]}
+   :quantity :min-tipover-margin
+   :limit {:min 0.3 :basis "estimate: keep 30% longitudinal static-stability margin at emergency-stop deceleration"}
+   :boundary {:lo 0.4 :hi 3.0}}]}
