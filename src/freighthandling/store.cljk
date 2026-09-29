@@ -1,6 +1,6 @@
 (ns freighthandling.store
   "SSoT for the ISCO-08 9333 independent freight handling practice
-  actor (itonami actor pattern, ADR-2607011000 / CLAUDE.md Actors
+  actor (itonami actor pattern, ADR-2607011000 / AGENTS.md Actors
   section; README's 'Robotics premise' — a pallet-handling robot
   performs freight loading, unloading and weight-verification tasks
   under this advisor/governor pair, which never dispatches hardware
